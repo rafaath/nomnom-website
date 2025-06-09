@@ -10,7 +10,7 @@ export default function Header() {
           <Link href="#pricing" className="hover:underline">Pricing</Link>
           <Link href="#contact" className="hover:underline">Contact</Link>
         </nav>
-        <Link href="#demo" className="bg-black text-white px-4 py-2 rounded-md text-sm">Book a demo</Link>
+        <Link href="#contact" className="bg-black text-white px-4 py-2 rounded-md text-sm">Book a demo</Link>
       </div>
     </header>
   );
