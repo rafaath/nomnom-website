@@ -1,74 +1,99 @@
 "use client";
 
 import { Icon } from "@/components/ui/icon";
-import { Marquee } from "@devnomic/marquee";
-import "@devnomic/marquee/dist/index.css";
+import { ParallaxScroll } from "@/components/ui/parallax-scroll";
+import { motion } from "framer-motion";
 import { icons } from "lucide-react";
-interface sponsorsProps {
+
+interface ServiceProps {
   icon: string;
   name: string;
 }
 
-const sponsors: sponsorsProps[] = [
+const restaurantServices: ServiceProps[] = [
   {
-    icon: "Crown",
-    name: "Acmebrand",
+    icon: "CalendarRange",
+    name: "Online Reservations",
   },
   {
-    icon: "Vegan",
-    name: "Acmelogo",
+    icon: "ShoppingCart",
+    name: "POS",
   },
   {
-    icon: "Ghost",
-    name: "Acmesponsor",
+    icon: "Package",
+    name: "Inventory",
   },
   {
-    icon: "Puzzle",
-    name: "Acmeipsum",
+    icon: "QrCode",
+    name: "Scan to Order",
   },
   {
-    icon: "Squirrel",
-    name: "Acme",
+    icon: "Receipt",
+    name: "Accounting",
   },
   {
-    icon: "Cookie",
-    name: "Accmee",
+    icon: "Globe",
+    name: "Webshop",
   },
   {
-    icon: "Drama",
-    name: "Acmetech",
+    icon: "CreditCard",
+    name: "Payment",
+  },
+  {
+    icon: "Truck",
+    name: "Delivery Integrations",
+  },
+  {
+    icon: "CalendarRange",
+    name: "Online Reservations",
+  },
+  {
+    icon: "ShoppingCart",
+    name: "POS",
+  },
+  {
+    icon: "Package",
+    name: "Inventory",
   },
 ];
 
 export const SponsorsSection = () => {
   return (
-    <section id="sponsors" className="max-w-[75%] mx-auto pb-24 sm:pb-32">
-      <h2 className="text-lg md:text-xl text-center mb-6">
-        Our Platinum Sponsors
-      </h2>
+    <section id="trusted-by" className="w-[95%] max-w-7xl mx-auto py-20 sm:py-28">
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-xl md:text-2xl text-center mb-12 font-bold"
+      >
+        Trusted by
+      </motion.h2>
 
       <div className="mx-auto">
-        <Marquee
-          className="gap-[3rem]"
-          fade
-          innerClassName="gap-[3rem]"
-          pauseOnHover
+        <ParallaxScroll
+          direction="horizontal"
+          className="gap-6 py-4"
+          baseVelocity={2}
         >
-          {sponsors.map(({ icon, name }) => (
-            <div
-              key={name}
-              className="flex items-center text-xl md:text-2xl font-medium"
+          {restaurantServices.map(({ icon, name }, index) => (
+            <motion.div
+              key={`${name}-${index}`}
+              className="flex flex-col items-center justify-center bg-background rounded-xl border border-border/30 shadow-sm p-6 w-52 h-40"
+              whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
+              <div className="p-3 rounded-full bg-primary/10 mb-4">
               <Icon
                 name={icon as keyof typeof icons}
                 size={32}
-                color="white"
-                className="mr-2"
+                  color="hsl(var(--primary))"
+                  className="text-primary"
               />
-              {name}
             </div>
+              <span className="text-base font-medium text-center">{name}</span>
+            </motion.div>
           ))}
-        </Marquee>
+        </ParallaxScroll>
       </div>
     </section>
   );

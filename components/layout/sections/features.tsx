@@ -1,93 +1,160 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { Card3D } from "@/components/ui/3d-card";
+import { AnimatedSpotlight } from "@/components/ui/animated-spotlight";
 import { icons } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import Image from "next/image";
 
-interface FeaturesProps {
-  icon: string;
-  title: string;
-  description: string;
+interface RestaurantTypeProps {
+  name: string;
+  image?: string;
 }
 
-const featureList: FeaturesProps[] = [
+const restaurantTypes: RestaurantTypeProps[] = [
   {
-    icon: "TabletSmartphone",
-    title: "Mobile Friendly",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, consectetur.",
+    name: "Dine In",
+    image: "/restaurant-dine-in.jpg"
   },
   {
-    icon: "BadgeCheck",
-    title: "Social Proof",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Natus consectetur, odio ea accusamus aperiam.",
+    name: "Express",
+    image: "/restaurant-express.jpg"
   },
   {
-    icon: "Goal",
-    title: "Targeted Content",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. odio ea accusamus aperiam.",
+    name: "Hotpot",
+    image: "/restaurant-hotpot.jpg"
   },
   {
-    icon: "PictureInPicture",
-    title: "Strong Visuals",
-    description:
-      "Lorem elit. A odio velit cum aliquam. Natus consectetur dolores, odio ea accusamus aperiam.",
+    name: "Fine Dining",
+    image: "/restaurant-fine-dining.jpg"
   },
   {
-    icon: "MousePointerClick",
-    title: "Clear CTA",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing. odio ea accusamus consectetur.",
+    name: "Wirtshaus",
+    image: "/restaurant-wirtshaus.jpg"
   },
   {
-    icon: "Newspaper",
-    title: "Clear Headline",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur.",
+    name: "All-You-Can-Eat Buffet",
+    image: "/restaurant-buffet.jpg"
+  },
+  {
+    name: "Japanese Buffet",
+    image: "/restaurant-japanese.jpg"
+  },
+  {
+    name: "Malatang",
+    image: "/restaurant-malatang.jpg"
+  },
+  {
+    name: "Korean BBQ",
+    image: "/restaurant-korean-bbq.jpg"
   },
 ];
 
 export const FeaturesSection = () => {
+  const [activeType, setActiveType] = useState(restaurantTypes[0].name);
+  
   return (
-    <section id="features" className="container py-24 sm:py-32">
-      <h2 className="text-lg text-primary text-center mb-2 tracking-wider">
-        Features
-      </h2>
+    <section className="w-[95%] max-w-7xl mx-auto py-24 sm:py-32 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/3 h-1/2 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl -z-10"></div>
 
-      <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-        What Makes Us Different
-      </h2>
-
-      <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-8">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem
-        fugiat, odit similique quasi sint reiciendis quidem iure veritatis optio
-        facere tenetur.
-      </h3>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {featureList.map(({ icon, title, description }) => (
-          <div key={title}>
-            <Card className="h-full bg-background border-0 shadow-none">
-              <CardHeader className="flex justify-center items-center">
-                <div className="bg-primary/20 p-2 rounded-full ring-8 ring-primary/10 mb-4">
-                  <Icon
-                    name={icon as keyof typeof icons}
-                    size={24}
-                    color="hsl(var(--primary))"
-                    className="text-primary"
-                  />
-                </div>
-
-                <CardTitle>{title}</CardTitle>
-              </CardHeader>
-
-              <CardContent className="text-muted-foreground text-center">
-                {description}
-              </CardContent>
-            </Card>
+      <AnimatedSpotlight className="max-w-4xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <div className="overflow-hidden mb-4">
+            <TextReveal 
+              text="Experience NomNom in action" 
+              as="h2"
+              className="text-3xl md:text-4xl font-bold"
+            />
           </div>
-        ))}
+          <p className="text-xl text-muted-foreground">
+            Explore how NomNom can help you operate your restaurant at your fingertips.
+          </p>
+        </motion.div>
+      </AnimatedSpotlight>
+
+      <div className="flex flex-col md:flex-row gap-10 items-start">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="md:w-1/3"
+        >
+          <Card3D className="rounded-xl" rotationIntensity={5}>
+            <div className="bg-card border border-border/40 rounded-xl shadow-sm">
+              <div className="flex flex-col gap-2 p-2">
+                {restaurantTypes.map((type) => (
+                  <button
+                    key={type.name}
+                    className={`text-left px-4 py-3 rounded-lg transition-all duration-300 ${
+                      activeType === type.name
+                        ? "bg-primary text-white font-medium shadow-md"
+                        : "hover:bg-primary/10"
+                    }`}
+                    onClick={() => setActiveType(type.name)}
+                  >
+                    <span className="font-medium">{type.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </Card3D>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="md:w-2/3 relative aspect-video rounded-xl overflow-hidden"
+        >
+          <Card3D
+            rotationIntensity={8}
+            translateZ={50}
+            className="rounded-xl overflow-hidden h-full"
+          >
+            <div className="relative h-full bg-muted rounded-xl border border-border/40 shadow-lg overflow-hidden">
+              {/* This would be replaced with actual images when available */}
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-background to-muted">
+                <p className="text-xl font-medium text-center px-8">
+                  {activeType} visualization
+                </p>
+              </div>
+            </div>
+          </Card3D>
+        </motion.div>
       </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="mt-20 text-center"
+      >
+        <h3 className="font-medium text-xl mb-8">Trusted Partners</h3>
+        <div className="flex flex-wrap justify-center gap-8">
+          {/* Placeholder for partner logos */}
+          {[1, 2, 3, 4, 5].map((i) => (
+            <motion.div 
+              key={i} 
+              className="w-32 h-12 rounded-md bg-card border border-border/30 flex items-center justify-center shadow-sm"
+              whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <span className="text-muted-foreground">Partner {i}</span>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };
