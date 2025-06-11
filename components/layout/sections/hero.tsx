@@ -156,60 +156,7 @@ export const HeroSection = () => {
             />
           </motion.div>
 
-          {/* Restaurant Command Center - Clean & Prominent */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2 }}
-            className="w-full max-w-5xl mx-auto"
-          >
-            <div className="text-center mb-8">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">Restaurant Command Center</h3>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                A unified dashboard that brings all your restaurant operations together in perfect harmony
-              </p>
-            </div>
-            
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-              
-              <div className="relative bg-background/80 backdrop-blur-sm border border-border/40 rounded-2xl p-8 md:p-12 shadow-xl">
-                <div className="flex flex-col items-center space-y-6">
-                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <ChefHat className="w-10 h-10 text-primary" />
-                  </div>
-                  
-                  <div className="text-center space-y-4">
-                    <h4 className="text-2xl font-semibold">Complete Restaurant Management</h4>
-                    <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
-                      From inventory tracking to staff scheduling, customer management to financial reporting - 
-                      everything you need in one beautiful, intuitive interface.
-                    </p>
-                  </div>
-                  
-                  <div className="flex space-x-4 pt-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                      <span className="text-sm text-muted-foreground">Online</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                      <span className="text-sm text-muted-foreground">Processing</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                      <span className="text-sm text-muted-foreground">Analytics</span>
-                    </div>
-                  </div>
-                </div>
 
-                <Button className="mt-6 px-6 py-3 font-medium">
-                  Explore Dashboard
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
